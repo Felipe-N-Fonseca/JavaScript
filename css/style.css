@@ -1,0 +1,11 @@
+h1,input,div,button{
+    display: block;
+    margin: 0 auto;
+    float: left;
+    width: 100%;
+    text-align: center;
+}
+input,button{
+    width: 30%;
+    float: none;
+}

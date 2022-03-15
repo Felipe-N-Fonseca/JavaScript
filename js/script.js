@@ -1,4 +1,5 @@
 let formulario = document.getElementById('formulario-02');
+ver = 0
 
 formulario.addEventListener('submit', function(event){
     event.preventDefault();
@@ -27,15 +28,11 @@ function validacao(elemento){
         event.preventDefault();
         event.stopPropagation();
         if (!this.value.match(/\w+/i)){
-            document.querySelector('.mensagem').innerHTML = '<p class="erro">ERRO DIGITE UM VALOR VÁLIDO</p>'
-            this.classList.add('erro');
-            this.parentNode.classList.add('erro');
+            erro(true, elemento);
             return false;
         }else{
             let valor = this.value
-            document.querySelector('.mensagem').innerHTML = ''
-            this.classList.remove('erro');
-            this.parentNode.classList.remove('erro');
+            erro(false, elemento);
         }
     })
 }
@@ -44,15 +41,11 @@ function email(elemento){
         event.preventDefault();
         event.stopPropagation();
         if (!this.value.match(/\w+[@]\w+[.]\w[.]*\w*/i)){
-            document.querySelector('.mensagem').innerHTML = '<p class="erro">ERRO DIGITE UM VALOR VÁLIDO</p>'
-            this.classList.add('erro');
-            this.parentNode.classList.add('erro');
+            erro(true, elemento);
             return false;
         }else{
             let valor = this.value
-            document.querySelector('.mensagem').innerHTML = ''
-            this.classList.remove('erro');
-            this.parentNode.classList.remove('erro');
+            erro(false, elemento);
         }
     })
 }
@@ -61,15 +54,11 @@ function tel(elemento){
         event.preventDefault();
         event.stopPropagation();
         if (!this.value.match(/^\d{0,2}\d{4,5}[-]{0,1}\d{4}$/)){
-            document.querySelector('.mensagem').innerHTML = '<p class="erro">ERRO DIGITE UM VALOR VÁLIDO</p>'
-            this.classList.add('erro');
-            this.parentNode.classList.add('erro');
+            erro(true, elemento);
             return false;
         }else{
             let valor = this.value.match(/-/) ? this.value.replace(/-/,'') : this.value
-            document.querySelector('.mensagem').innerHTML = ''
-            this.classList.remove('erro');
-            this.parentNode.classList.remove('erro');
+            erro(false, elemento);
         }
     })
 }
@@ -78,15 +67,11 @@ function num(elemento){
         event.preventDefault();
         event.stopPropagation();
         if (!this.value.match(/^\d{5}[-]{0,1}\d{3}$/)){
-            document.querySelector('.mensagem').innerHTML = '<p class="erro">ERRO DIGITE UM VALOR VÁLIDO</p>'
-            this.classList.add('erro');
-            this.parentNode.classList.add('erro');
+            erro(true, elemento);
             return false;
         }else{
             let valor = this.value.match(/-/) ? this.value.replace(/-/,'') : this.value
-            document.querySelector('.mensagem').innerHTML = ''
-            this.classList.remove('erro');
-            this.parentNode.classList.remove('erro');
+            erro(false, elemento);
         }
     })
 }
@@ -95,15 +80,30 @@ function uf(elemento){
         event.preventDefault();
         event.stopPropagation();
         if (!this.value.match(/^[a-z]{2}$/i)){
-            document.querySelector('.mensagem').innerHTML = '<p class="erro">ERRO DIGITE UM VALOR VÁLIDO</p>'
-            this.classList.add('erro');
-            this.parentNode.classList.add('erro');
+            erro(true, elemento);
             return false;
         }else{
             let valor = this.value
-            document.querySelector('.mensagem').innerHTML = ''
-            this.classList.remove('erro');
-            this.parentNode.classList.remove('erro');
+            erro(false, elemento);
         }
     })
+}
+function erro(questao, elemento){
+    if (questao){
+        elemento.classList.add('erro');
+        ver ++
+    }else{
+        elemento.classList.remove('erro');
+        ver --
+    }
+    if (ver == 0){
+        elemento.parentNode.classList.remove('erro');
+        document.querySelector('.mensagem').innerHTML = ''
+    }else if(ver < 0 ){
+        window.alert(`pane, erro inesperado valor de ver = ${ver}`)
+    }else{
+        document.querySelector('.mensagem').innerHTML = `<p class="erro">ERRO DIGITE UM VALOR VÁLIDO</p></br><p>Número de caixas em erro: ${ver}</p>`
+        elemento.parentNode.classList.add('erro');
+        return false;
+    }
 }

@@ -52,8 +52,7 @@ button:hover {
     background-color: #4545c2;
 }
 
-.mensagem,
-#resultado {
+.mensagem {
     font-size: 2rem;
     text-align: center;
     padding: 2rem;

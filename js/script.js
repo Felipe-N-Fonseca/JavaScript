@@ -4,11 +4,33 @@ ver = 0
 formulario.addEventListener('submit', function(event){
     event.preventDefault();
     event.stopPropagation();
-    if(this.getAttribute('class').match(/erro/)){
-        return false;
+    console.log(this.getAttribute('class'))
+    if (validageral()){
+        if(this.getAttribute('class').match(/erro/)){
+            return false;
+        }else{
+            return false;
+        }
     }
 })
 
+function validageral(){
+    let evento = formulario.getElementsByTagName('input')
+    let d = 0
+    for(let c of evento){
+        if(!this.value.match('')){
+            d++
+        }else{
+            d--
+        }  
+    }
+    console.log(d);
+    if(d == 6){
+        return true;
+    }else{
+        return false;
+    }
+}
 /*
 nome e cidade = obrigatorio
 email = email /\w+[@]\w+[.]\w[.]*\w* /
